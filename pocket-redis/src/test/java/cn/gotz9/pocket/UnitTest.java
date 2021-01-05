@@ -60,6 +60,10 @@ public class UnitTest {
     @Test
     public void redisAccessorTest() {
         RedisFixedHashField<String, String> hashField = new RedisFixedHashField<>(STRING_VALUE_CODEC, "jedis-hash", () -> new Jedis("127.0.0.1", 6379), String::toString);
+
+        String data = "data";
+        Assert.assertTrue(hashField.updateVal("field", data));
+        Assert.assertTrue(hashField.fetchVal("field").map(s -> Objects.equals(s, data)).orElse(false));
     }
 
     private static class ByteArrayOutputStreamStringDataStorage implements OneParamByteStorage<String> {
