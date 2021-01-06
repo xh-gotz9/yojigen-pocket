@@ -3,6 +3,7 @@ package cn.gotz9.pocket;
 import cn.gotz9.pocket.codec.CodecUtil;
 import cn.gotz9.pocket.codec.ValueCodec;
 import cn.gotz9.pocket.storage.OneParamByteStorage;
+import cn.gotz9.pocket.storage.OneParamByteStorageProxy;
 import cn.gotz9.pocket.storage.StorageUtil;
 
 import java.util.Optional;
@@ -11,19 +12,20 @@ public abstract class AbstractOneParamAccessor<T, P> implements OneParamAccessor
 
     private final ValueCodec<T> codec;
 
-    private final OneParamByteStorage<String> byteStorage;
+    private final OneParamByteStorage<P> byteStorage;
 
-    private final ParamConverter<P, String> keyGenerator;
-
-    public AbstractOneParamAccessor(ValueCodec<T> codec, OneParamByteStorage<String> byteStorage, ParamConverter<P, String> keyGenerator) {
+    public AbstractOneParamAccessor(ValueCodec<T> codec, OneParamByteStorage<P> byteStorage) {
         this.codec = codec;
         this.byteStorage = byteStorage;
-        this.keyGenerator = keyGenerator;
+    }
+
+    public <I> AbstractOneParamAccessor(ValueCodec<T> codec, OneParamByteStorage<I> byteStorage, ParamConverter<P, I> paramConverter) {
+        this(codec, new OneParamByteStorageProxy<>(byteStorage, paramConverter));
     }
 
     @Override
     public Optional<T> fetchVal(P param) {
-        byte[] bytes = StorageUtil.readBytes(byteStorage, keyGenerator.convert(param));
+        byte[] bytes = StorageUtil.readBytes(byteStorage, param);
 
         T val;
         if (bytes != null && (val = CodecUtil.decode(codec, bytes)) != null) {
@@ -35,7 +37,7 @@ public abstract class AbstractOneParamAccessor<T, P> implements OneParamAccessor
 
     @Override
     public boolean updateVal(P param, T data) {
-        return StorageUtil.writeBytes(byteStorage, keyGenerator.convert(param), CodecUtil.encode(codec, data));
+        return StorageUtil.writeBytes(byteStorage, param, CodecUtil.encode(codec, data));
     }
 
 }
