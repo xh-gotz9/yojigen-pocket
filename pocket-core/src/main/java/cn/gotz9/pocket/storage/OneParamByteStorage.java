@@ -5,8 +5,8 @@ package cn.gotz9.pocket.storage;
  */
 public interface OneParamByteStorage<P> {
 
-    byte[] readBytes(P param1) throws Exception;
+    byte[] readData(P param1) throws Exception;
 
-    boolean writeBytes(P param1, byte[] data) throws Exception;
+    boolean writeData(P param1, byte[] data) throws Exception;
 
 }
