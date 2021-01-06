@@ -71,12 +71,12 @@ public class UnitTest {
         private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         @Override
-        public byte[] readBytes(String param1) {
+        public byte[] readData(String param1) {
             return outputStream.toByteArray();
         }
 
         @Override
-        public boolean writeBytes(String param1, byte[] data) {
+        public boolean writeData(String param1, byte[] data) {
             outputStream.write(data, 0, data.length);
             return true;
         }

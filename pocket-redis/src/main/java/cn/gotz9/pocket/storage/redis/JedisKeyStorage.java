@@ -14,12 +14,12 @@ public class JedisKeyStorage implements OneParamByteStorage<String>, DataStorage
     }
 
     @Override
-    public byte[] readBytes(String param1) throws Exception {
+    public byte[] readData(String param1) throws Exception {
         return dataStorageProvider.getSource().get(param1.getBytes());
     }
 
     @Override
-    public boolean writeBytes(String param1, byte[] data) throws Exception {
+    public boolean writeData(String param1, byte[] data) throws Exception {
         dataStorageProvider.getSource().set(param1.getBytes(), data);
         return true;
     }

@@ -13,12 +13,12 @@ public class JedisClusterKeyStorage extends AbstractStorage<JedisCluster> implem
     }
 
     @Override
-    public byte[] readBytes(String param1) {
+    public byte[] readData(String param1) {
         return getSource().get(param1.getBytes());
     }
 
     @Override
-    public boolean writeBytes(String param1, byte[] data) {
+    public boolean writeData(String param1, byte[] data) {
         getSource().set(param1.getBytes(), data);
         return true;
     }
