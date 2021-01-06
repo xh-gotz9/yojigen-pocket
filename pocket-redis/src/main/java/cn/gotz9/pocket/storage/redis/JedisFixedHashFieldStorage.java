@@ -3,23 +3,26 @@ package cn.gotz9.pocket.storage.redis;
 import cn.gotz9.pocket.storage.DataStorageProvider;
 import redis.clients.jedis.Jedis;
 
-public class JedisFixedHashFieldStorage extends JedisKeyStorage {
+/**
+ * 从参数指定的 hash 结构的固定 field 获取数据
+ */
+public class JedisFixedHashFieldStorage extends JedisKeyByteStorage {
 
-    public final String key;
+    public final String field;
 
-    public JedisFixedHashFieldStorage(String key, DataStorageProvider<Jedis> dataStorageProvider) {
+    public JedisFixedHashFieldStorage(String field, DataStorageProvider<Jedis> dataStorageProvider) {
         super(dataStorageProvider);
-        this.key = key;
+        this.field = field;
     }
 
     @Override
-    public byte[] readData(String param1) throws Exception {
-        return getSource().hget(key.getBytes(), param1.getBytes());
+    public byte[] readData(String key) throws Exception {
+        return getSource().hget(key.getBytes(), field.getBytes());
     }
 
     @Override
-    public boolean writeData(String param1, byte[] data) throws Exception {
-        getSource().hset(key.getBytes(), param1.getBytes(), data);
+    public boolean writeData(String key, byte[] data) throws Exception {
+        getSource().hset(key.getBytes(), field.getBytes(), data);
         return true;
     }
 

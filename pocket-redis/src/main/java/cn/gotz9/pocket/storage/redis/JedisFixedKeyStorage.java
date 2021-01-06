@@ -6,6 +6,9 @@ import cn.gotz9.pocket.storage.DataStorageProvider;
 import cn.gotz9.pocket.storage.NoParamByteStorage;
 import redis.clients.jedis.Jedis;
 
+/**
+ * 在固定的 redis key 上读写数据
+ */
 public class JedisFixedKeyStorage extends AbstractStorage<Jedis> implements NoParamByteStorage<Jedis> {
 
     private final String key;

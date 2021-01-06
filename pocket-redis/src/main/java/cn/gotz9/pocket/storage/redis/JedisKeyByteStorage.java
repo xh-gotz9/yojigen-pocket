@@ -3,13 +3,14 @@ package cn.gotz9.pocket.storage.redis;
 import cn.gotz9.pocket.codec.CodecException;
 import cn.gotz9.pocket.storage.DataStorageProvider;
 import cn.gotz9.pocket.storage.OneParamByteStorage;
+import cn.gotz9.pocket.storage.OneParamStorage;
 import redis.clients.jedis.Jedis;
 
-public class JedisKeyStorage implements OneParamByteStorage<String>, DataStorageProvider<Jedis> {
+public class JedisKeyByteStorage implements OneParamByteStorage<String>, DataStorageProvider<Jedis> {
 
     private final DataStorageProvider<Jedis> dataStorageProvider;
 
-    public JedisKeyStorage(DataStorageProvider<Jedis> dataStorageProvider) {
+    public JedisKeyByteStorage(DataStorageProvider<Jedis> dataStorageProvider) {
         this.dataStorageProvider = dataStorageProvider;
     }
 

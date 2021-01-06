@@ -13,13 +13,4 @@ public class RedisFixedHashField<T, P> extends AbstractOneParamAccessor<T, P> {
         super(codec, new JedisFixedHashFieldStorage(key, storageProvider), keyGenerator);
     }
 
-    @Override
-    public Optional<T> fetchVal(P param) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean updateVal(P param, T data) {
-        return false;
-    }
 }

@@ -13,14 +13,14 @@ public class JedisHashStorage extends AbstractStorage<Jedis> implements TwoParam
     }
 
     @Override
-    public byte[] readData(String param1, String param2) {
-        return getSource().get(param1.getBytes());
+    public byte[] readData(String key, String field) {
+        return getSource().hget(key.getBytes(), field.getBytes());
     }
 
     @Override
-    public boolean writeData(String param1, String param2, byte[] data) {
+    public boolean writeData(String key, String field, byte[] data) {
         try {
-            getSource().set(param1.getBytes(), data);
+            getSource().hset(key.getBytes(), field.getBytes(), data);
             return true;
         } catch (Exception e) {
             throw new CodecException("fetch bytes failed", e);
