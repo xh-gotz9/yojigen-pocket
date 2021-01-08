@@ -45,7 +45,7 @@ public class UnitTest {
         JedisFixedHashFieldStorage byteStorage = new JedisFixedHashFieldStorage("hash-key",
                 () -> new Jedis("127.0.0.1", 6379));
 
-        RedisKeyField<TestObj, TestObj> accessor = new RedisKeyField<>(new KryoValueCodec<>(), byteStorage, TestObj::getName);
+        GenericRedisKeySlot<TestObj, TestObj> accessor = new GenericRedisKeySlot<>(new KryoValueCodec<>(), byteStorage, TestObj::getName);
 
         TestObj testObj = new TestObj();
         testObj.name = "test-name";
@@ -59,11 +59,11 @@ public class UnitTest {
 
     @Test
     public void redisAccessorTest() {
-        RedisFixedHashField<String, String> hashField = new RedisFixedHashField<>(STRING_VALUE_CODEC, "jedis-hash", () -> new Jedis("127.0.0.1", 6379), String::toString);
+        RedisFixedHashSlot<String> hashSlot = new RedisFixedHashSlot<String>(STRING_VALUE_CODEC, "jedis-hash", () -> new Jedis("127.0.0.1", 6379));
 
         String data = "data";
-        Assert.assertTrue(hashField.updateVal("field", data));
-        Assert.assertTrue(hashField.fetchVal("field").map(s -> Objects.equals(s, data)).orElse(false));
+        Assert.assertTrue(hashSlot.updateVal("field", data));
+        Assert.assertTrue(hashSlot.fetchVal("field").map(s -> Objects.equals(s, data)).orElse(false));
     }
 
     private static class ByteArrayOutputStreamStringDataStorage implements OneParamByteStorage<String> {
