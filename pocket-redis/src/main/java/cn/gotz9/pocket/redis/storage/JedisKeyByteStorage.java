@@ -1,9 +1,7 @@
-package cn.gotz9.pocket.storage.redis;
+package cn.gotz9.pocket.redis.storage;
 
-import cn.gotz9.pocket.codec.CodecException;
 import cn.gotz9.pocket.storage.DataStorageProvider;
 import cn.gotz9.pocket.storage.OneParamByteStorage;
-import cn.gotz9.pocket.storage.OneParamStorage;
 import redis.clients.jedis.Jedis;
 
 public class JedisKeyByteStorage implements OneParamByteStorage<String>, DataStorageProvider<Jedis> {

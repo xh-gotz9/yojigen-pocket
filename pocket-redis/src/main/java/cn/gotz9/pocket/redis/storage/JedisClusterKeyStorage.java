@@ -1,6 +1,5 @@
-package cn.gotz9.pocket.storage.redis;
+package cn.gotz9.pocket.redis.storage;
 
-import cn.gotz9.pocket.codec.CodecException;
 import cn.gotz9.pocket.storage.AbstractStorage;
 import cn.gotz9.pocket.storage.DataStorageProvider;
 import cn.gotz9.pocket.storage.OneParamByteStorage;

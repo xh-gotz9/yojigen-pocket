@@ -1,8 +1,8 @@
-package cn.gotz9.pocket;
+package cn.gotz9.pocket.redis;
 
 import cn.gotz9.pocket.codec.support.KryoValueCodec;
+import cn.gotz9.pocket.redis.storage.JedisFixedHashFieldStorage;
 import cn.gotz9.pocket.storage.OneParamByteStorage;
-import cn.gotz9.pocket.storage.redis.JedisFixedHashFieldStorage;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.Assert;

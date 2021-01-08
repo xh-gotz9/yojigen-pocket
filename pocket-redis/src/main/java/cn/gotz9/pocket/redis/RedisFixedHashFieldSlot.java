@@ -1,7 +1,8 @@
-package cn.gotz9.pocket;
+package cn.gotz9.pocket.redis;
 
+import cn.gotz9.pocket.ParamConverter;
 import cn.gotz9.pocket.codec.ValueCodec;
-import cn.gotz9.pocket.storage.redis.JedisKeyByteStorage;
+import cn.gotz9.pocket.redis.storage.JedisKeyByteStorage;
 
 public class RedisFixedHashFieldSlot<T> extends GenericRedisFixedHashFieldSlot<T, String> {
 
